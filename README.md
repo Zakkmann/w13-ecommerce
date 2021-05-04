@@ -1,35 +1,21 @@
-# SkillCrucial React Redux boilerplate
+# ECommerce by SkillCrucial React Redux boilerplate
 
 ## Quick start
 
-1. Clone this repo using:
-  ```shell
-  $ git clone git@github.com:ovasylenko/skillcrucial-react-redux-boilerplate.git
-  ```
+1. Install modules
+```
+yarn install
+```
 
-2. To install dependencies and clean the git repo run:
+2. Build SSR
+```
+yarn run build:ssr
+```
 
-  ```shell
-  $ yarn install
-  ```
-
-  *We recommend using `yarn` for installing packages, but you can use `npm` instead*:
-
-  ```shell
-  $ npm install
-  ```
-3. Create first build
-
-  ```shell
-  $ yarn run build:prod
-  ```
-4. Copy .env.example file to .env and make the necessary changes there
-
-5. Run project in Dev mode
-
-  ```shell
-  $ yarn run dev
-  ```
+3. Start development
+```
+yarn run dev
+```
 
 ## Features
 
