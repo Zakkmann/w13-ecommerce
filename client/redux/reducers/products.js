@@ -1,5 +1,11 @@
 const initialState = {
-  goods: [],
+  goods: {
+    // 'id': {
+    //   id: '384u9014',
+    //   title: 'Beer',
+    //   price: 10
+    // }
+  },
   rates: {},
   currency: 'USD',
   sort: {
@@ -46,13 +52,22 @@ export default (state = initialState, action) => {
       return state
   }
 }
-
+/*
+array = [{ id: 10, title: 'Pepe' }, { id: 'hi', title: 'Marina' }]
+object = { 
+  '10': { id: 10, title: 'Pepe' },
+  'hi': { id: 'hi', title: 'Marina' }
+}
+*/
 export function getProductsFromServer() {
   return (dispatch) => {
     fetch('/api/v1/goods')
       .then((response) => response.json())
       .then((result) => {
-        dispatch({ type: GET_PRODUCTS, listOfGoods: result })
+        const newObj = result.reduce((acc, product) => {
+          return {...acc, [product.id]: product}
+        }, {})
+        dispatch({ type: GET_PRODUCTS, listOfGoods: newObj })
       })
   }
 }
@@ -85,3 +100,25 @@ export function sortProducts(sortType = 'price', sortDirection = 'a-z') {
     })
   }
 }
+
+/*
+export function getProductsFromServerToMap() {
+  return (dispatch) => {
+    fetch('/api/v1/goods')
+      .then((response) => response.json())
+      .then((result) => {
+        let mapOfProducts = new Map() //Объявляем переменную с типом данных Map
+        result.forEach((product) => { // Т.к у Map есть Геттеры и Сеттеры, лучше использовать forEach
+          if(!mapOfProducts.has(product.id)){ // Проверка есть ли наш ID в Мапе
+            mapOfProducts.set(product.id, product) // Если нет, то добавляем с помощью Сет новый объект с ключем product id, value - {} product изначальный
+          }
+        }
+        dispatch({ type: GET_PRODUCTS, listOfGoods: mapOfProducts })
+      })
+  }
+}
+
+export function removeProductsMap() {
+
+}
+*/
